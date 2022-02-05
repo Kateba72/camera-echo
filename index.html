@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Camera Echo</title>
+</head>
+<body>
+<video></video>
+
+<script>
+  const constraints = { audio: true, video: true }
+  
+  navigator.mediaDevices.getUserMedia(constraints)
+  .then(function(mediaStream) {
+    let video = document.querySelector('video')
+    video.srcObject = mediaStream
+    video.onloadedmetadata = function(e) {
+      video.play()
+    }
+    video.addEventListener("click", (event) => {
+      video.requestFullscreen()
+    })
+  })
+  .catch(function(err) { console.log(err.name + ": " + err.message); })
+</script>
+
+</body>
+</html>
